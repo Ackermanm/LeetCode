@@ -3,23 +3,20 @@ import java.util.Set;
 
 public class L03LongestSubstringSWithoutRepeatingCharacters {
     public int lengthOfLongestSubstring(String s) {
-        int longest = s.length();
-        boolean flag = false;
-        while (longest >= 1) {
-            for (int i = 0; i <= s.length() - longest; i++) {
-                if (!hasRepeat(s.substring(i, i + longest))) {
-                    flag = true;
+        int n = s.length();
+        int longest = 1;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + longest; j <= n; j++) {
+                if (hasRepeat(s.substring(i, j))) {
                     break;
+                } else {
+                    longest++;
                 }
-            }
-            if (flag)
-                break;
-            else {
-                longest--;
             }
         }
 
-        return longest;
+        return longest - 1;
     }
 
     public boolean hasRepeat(String string) {
